@@ -4,13 +4,97 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>ThinkSync Coming Soon</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+            margin: 0;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+        }
+
+        #countdown {
+            display: flex;
+            gap: 20px;
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        .time-box {
+            background: #111;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.2);
+            text-align: center;
+            min-width: 100px;
+        }
+
+        .label {
+            font-size: 0.8rem;
+            color: #bbb;
+            margin-top: 10px;
+            display: block;
+        }
+    </style>
 </head>
 
-<body style="background-color: black; color: white;">
-    <h1 align="center">
-        ThinkSync Cooming Soon
-    </h1>
+<body>
+    <h1>ThinkSync Coming Soon</h1>
+    <div id="countdown">
+        <div class="time-box">
+            <span id="days">0</span>
+            <span class="label">Days</span>
+        </div>
+        <div class="time-box">
+            <span id="hours">0</span>
+            <span class="label">Hours</span>
+        </div>
+        <div class="time-box">
+            <span id="minutes">0</span>
+            <span class="label">Minutes</span>
+        </div>
+        <div class="time-box">
+            <span id="seconds">0</span>
+            <span class="label">Seconds</span>
+        </div>
+    </div>
+
+    <script>
+        // Set the target date (8th September, current year)
+        const targetDate = new Date("September 8, " + new Date().getFullYear() + " 00:00:00").getTime();
+
+        const countdown = setInterval(() => {
+            const now = new Date().getTime();
+            const distance = targetDate - now;
+
+            if (distance <= 0) {
+                clearInterval(countdown);
+                document.getElementById("countdown").innerHTML = "<h2>We Are Live!</h2>";
+                return;
+            }
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById("days").innerText = days;
+            document.getElementById("hours").innerText = hours;
+            document.getElementById("minutes").innerText = minutes;
+            document.getElementById("seconds").innerText = seconds;
+        }, 1000);
+    </script>
 </body>
 
 </html>
